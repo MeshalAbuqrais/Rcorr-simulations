@@ -146,9 +146,7 @@ def distance_correlation_dcorr(X, Y):
         """Compute the pairwise geodesic distance matrix for a dataset on the unit sphere."""
         # Ensure normalization of points on the unit sphere
         Z_norm = Z / np.linalg.norm(Z, axis=1, keepdims=True)
-        # Use arc cosine of dot product to calculate geodesic distances
         dot_product_matrix = np.dot(Z_norm, Z_norm.T)
-        # Clip values to avoid numerical errors beyond the interval [-1, 1]
         dot_product_matrix = np.clip(dot_product_matrix, -1.0, 1.0)
         geodesic_distance = np.arccos(dot_product_matrix)
         return geodesic_distance
@@ -183,63 +181,6 @@ def distance_correlation_dcorr(X, Y):
     dcor = dcov_AB / np.sqrt(dcov_AA * dcov_BB)
 
     return dcor
-data_1_BF = np.array([[5363, 5716, 6209],
-                  [5610, 6623, 4966],
-                  [-1665, 4812, 8606],
-                  [2652, 8051, 5306],
-                  [4701, 6902, 5501],
-                  [1010, 4040, 9092],
-                  [2555, 7348, 6283],
-                  [6585, 5958, 4599],
-                  [7675, 5855, 2611],
-                  [4554, 4921, 7419],
-                  [5553, 4264, 7140],
-                  [5505, 6900, 4698],
-                  [3704, 5870, 7198],
-                  [6978, 7063, 1191],
-                  [9064, 3591, 2223],
-                  [4965, 8504, -1738],
-                  [8289, 4844, 2798],
-                  [4587, 7427, 4878],
-                  [8746, 811, 4779],
-                  [1090, 1575, 9815],
-                  [5851, 5972, 5485],
-                  [1409, 8086, 5712],
-                  [8001, 5819, 1454],
-                  [1885, 7881, 5860],
-                  [-223, 1116, 9935],
-                  [762, 8482, 5242],
-                  [4258, 7343, 5287],
-                  [5519, 5625, 6155]])
-
-data_2_BM=np.array([[1820, 7221, 6675],
-                [7261, 5691, 3859],
-                [7485, 6581, 822],
-                [4986, 8430, -2018],
-                [5881, 3667, 7209],
-                [4320, 8118, 3928],
-                [5380, 8116, 2279],
-                [8643, 4707, 1774],
-                [7184, 6940, -487],
-                [7697, 5114, 3822],
-                [7550, 3576, 5497],
-                [7119, 7017, 305],
-                [6232, 5428, 5629],
-                [8092, 5864, 351],
-                [9029, 2670, -3369],
-                [5086, 5805, -6358],
-                [6814, 4440, 5819],
-                [5086, 8279, 2365],
-                [8493, 3602, 3860],
-                [6572, 7097, -2540],
-                [-1499, 272, 9883],
-                [4645, 8479, 2555],
-                [9997, 256, 0],
-                [4567, 8719, 1764],
-                [1415, 2437, 9595],
-                [5397, 8224, 1799],
-                [5573, 4698, 6847],
-                [7455, 4852, 4586]])
 
 data_3_GF=np.array([[4716, 4892, 7337],
                 [4526, 7174, 5295],
@@ -310,17 +251,7 @@ print(compute_and_rcorr_dcorr_for_datasets(data_3_GF,data_4_GM,0.5))
 
 def plot_datasets_on_sphere_with_means(data_X, data_Y, save_path=None, file_format='pdf', dpi=300,
                                        sphere_grid_color='black', zoom_level=1.0):
-    """
-    Plots datasets on the unit sphere with Fréchet means and optionally saves the plot.
 
-    Parameters:
-    - data_X, data_Y: Datasets to plot.
-    - save_path: File path to save the plot. If None, the plot is shown interactively.
-    - file_format: The format to save the file in (e.g., 'png', 'pdf', 'svg').
-    - dpi: The resolution of the saved plot.
-    - sphere_grid_color: The color of the grid lines on the sphere.
-    - zoom_level: A multiplier to control the zoom level. Values > 1 zoom out, values < 1 zoom in.
-    """
     # Normalize data to lie on the unit sphere
     data_X = normalize_data(data_X)
     data_Y = normalize_data(data_Y)
@@ -332,20 +263,16 @@ def plot_datasets_on_sphere_with_means(data_X, data_Y, save_path=None, file_form
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection='3d')
 
-    # Remove the 3D axes, grid, and background
     ax.set_axis_off()
 
-    # Plot data points with distinct markers and colors
     ax.scatter(data_X[:, 0], data_X[:, 1], data_X[:, 2], color='royalblue', marker='^', label='F-system', alpha=0.7, s=40)
     ax.scatter(data_Y[:, 0], data_Y[:, 1], data_Y[:, 2], color='limegreen', marker='v', label='MP-system', alpha=0.7, s=40)
 
-    # Plot Fréchet means with bold markers and distinct colors
     ax.scatter(frechet_mean_X[0], frechet_mean_X[1], frechet_mean_X[2], color='blue', s=150,
                label='Fréchet Mean F-system', edgecolors='black', marker='X')
     ax.scatter(frechet_mean_Y[0], frechet_mean_Y[1], frechet_mean_Y[2], color='green', s=150,
                label='Fréchet Mean MP-system', edgecolors='black', marker='P')
 
-    # Plot sphere surface with grid control
     u, v = np.mgrid[0:2 * np.pi:100j, 0:np.pi:50j]
     x = np.cos(u) * np.sin(v)
     y = np.sin(u) * np.sin(v)
@@ -353,18 +280,13 @@ def plot_datasets_on_sphere_with_means(data_X, data_Y, save_path=None, file_form
     ax.plot_surface(x, y, z, color='lightgrey', alpha=0.1,
                     rstride=2, cstride=2, edgecolor=sphere_grid_color, linewidth=0.4)
 
-    # Control the zoom level by adjusting the axis limits
     ax.set_xlim([-zoom_level, zoom_level])
     ax.set_ylim([-zoom_level, zoom_level])
     ax.set_zlim([-zoom_level, zoom_level])
-
-    # Add a legend
     ax.legend(loc='upper left', fontsize=10)
 
-    # Adjust the viewing angle for better perspective
     ax.view_init(elev=20, azim=30)
 
-    # Save the plot if a save path is provided
     if save_path:
         plt.savefig(save_path, dpi=dpi, bbox_inches='tight', format=file_format)
         print(f"Plot saved as '{save_path}' in {file_format} format.")
@@ -373,6 +295,6 @@ def plot_datasets_on_sphere_with_means(data_X, data_Y, save_path=None, file_form
 
 
 # Example usage with zoom control
-plot_datasets_on_sphere_with_means(data_1_BF, data_2_BM, save_path='vectorcardiogram data for girls using both systems.pdf', file_format='pdf',
+plot_datasets_on_sphere_with_means(data_3_GF, data_4_GM, save_path='vectorcardiogram data for girls using both systems.pdf', file_format='pdf',
                                    sphere_grid_color='black', zoom_level=0.8)
 
