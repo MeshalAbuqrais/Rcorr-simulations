@@ -271,58 +271,32 @@ base_point_1 = np.eye(3)
 base_point_2 = np.eye(3)
 t = 0.5
 
-#compute_and_save_rcorr_dcorr_independent_datasets(max_sample_size, max_norm, seed_1, seed_2, base_point_1, base_point_2, t, filename="raw_data_independent_samemeanI3_maxnorm06_seeds1_2.csv")
-# Plot data from CSV and save to file
-#plot_rcorr_and_dcorr_independent_datasets_from_csv("raw_data_independent_samemeanI3_maxnorm06_seeds1_2.csv", save=True, output_filename="rcorr_dcorr_plot_independent_samemean_maxnorm06.pdf")
+compute_and_save_rcorr_dcorr_independent_datasets(max_sample_size, max_norm, seed_1, seed_2, base_point_1, base_point_2, t, filename="raw_data_independent_samemeanI3_maxnorm06_seeds1_2.csv")
+plot_rcorr_and_dcorr_independent_datasets_from_csv("raw_data_independent_samemeanI3_maxnorm06_seeds1_2.csv", save=True, output_filename="grayscale_rcorr_dcorr_plot_independent_samemean_maxnorm06.pdf")
 
 
 
 # parameters for the Rcorr vs dcorr multiplicative function
-#sample_size=100
-#max_norm=0.6
-#seed=1
-#noise_levels = np.linspace(0, 2, 41)
-#angle1=0
-#base_point_2_1=np.eye(3)
-#angle2=np.pi/6
-#base_point_2_2=expm(np.array([[0, 0, 0],
-#                                      [0, 0, -1],
-#                                      [0, 1, 0]]))
-#E1=np.array([[0, 0, 0],
-#            [0, 0, -1],
-#             [0, 1, 0]])
-
-#E2=np.array([[0, 0, -1],
-#             [0, 0, 0],
-#             [1, 0, 0]])
-#angle3=np.pi
-#base_point_2_3=np.eye(3)
+sample_size=100
+max_norm=0.6
+seed=1
+noise_levels = np.linspace(0, 2, 41)
+angle1=0
+base_point_2_1=np.eye(3)
+angle2=np.pi/6
+base_point_2_2=expm(np.array([[0, 0, 0],
+                                      [0, 0, -1],
+                                      [0, 1, 0]]))
+angle3=np.pi
+base_point_2_3=np.eye(3)
 
 
 
-#compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle1,base_point_2_1,noise_levels,0.5,"maxnorm06_same_meanI3_rot0.csv")
-#compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle2,base_point_2_2,noise_levels,0.5,"maxnorm06_diff_mean_I3_expE1_rotpi6.csv")
-#compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle3,base_point_2_3,noise_levels,0.5,"maxnorm06same_meanI3_rotpi_neg_rcorr.csv")
-
-
-#compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle1,base_point_2_1,noise_levels,0.5,"same_meanI3_rot0.csv")
-#compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle2,base_point_2_2,noise_levels,0.5,"diff_mean_I3_expE1_rotpi6.csv")
-#compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle3,base_point_2_3,noise_levels,0.5,"same_meanI3_rotpi_neg_rcorr.csv")
-
-
-
-
-
-#plot_Rcorr_vs_dcorr_from_computed_data_multiplicative("maxnorm06_same_meanI3_rot0.csv",True,"plot_maxnorm06_same_meanI3_rot0.pdf")
-#plot_Rcorr_vs_dcorr_from_computed_data_multiplicative("maxnorm06_diff_mean_I3_expE1_rotpi6.csv",True,"plot_maxnorm06_diff_mean_I3_expE1_rotpi6.pdf")
-#plot_Rcorr_vs_dcorr_from_computed_data_multiplicative("maxnorm06same_meanI3_rotpi_neg_rcorr.csv",True,"plot_maxnorm06_same_meanI3_rotpi_neg_rcorr.pdf")
-
-#print(compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(15,0.5,seed,angle2,base_point_2_2,noise_levels,0.5,"Test.csv"))
-
+compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle1,base_point_2_1,noise_levels,0.5,"maxnorm06_same_meanI3_rot0.csv")
+compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle2,base_point_2_2,noise_levels,0.5,"maxnorm06_diff_mean_I3_expE1_rotpi6.csv")
+compute_and_save_Rcorr_dcorr_so3_noise_multiplicaive(sample_size,max_norm,seed,angle3,base_point_2_3,noise_levels,0.5,"maxnorm06same_meanI3_rotpi_neg_rcorr.csv")
 
 
 plot_Rcorr_vs_dcorr_from_computed_data_multiplicative("maxnorm06_same_meanI3_rot0.csv",True,"grayscale_plot_maxnorm06_same_meanI3_rot0.pdf")
 plot_Rcorr_vs_dcorr_from_computed_data_multiplicative("maxnorm06_diff_mean_I3_expE1_rotpi6.csv",True,"grayscale_plot_maxnorm06_diff_mean_I3_expE1_rotpi6.pdf")
 plot_Rcorr_vs_dcorr_from_computed_data_multiplicative("maxnorm06same_meanI3_rotpi_neg_rcorr.csv",True,"grayscale_plot_maxnorm06_same_meanI3_rotpi_neg_rcorr.pdf")
-
-plot_rcorr_and_dcorr_independent_datasets_from_csv("raw_data_independent_samemeanI3_maxnorm06_seeds1_2.csv", save=True, output_filename="grayscale_rcorr_dcorr_plot_independent_samemean_maxnorm06.pdf")
