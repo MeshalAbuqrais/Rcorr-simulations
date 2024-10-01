@@ -316,7 +316,7 @@ def visualize_data_on_sphere_with_perturbation(mu_X, kappa, num_samples, angle, 
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 10), subplot_kw={'projection': '3d'})
 
-    u, v = np.mgrid[0:2 * np.pi:100j, 0:np.pi:50j]  # Increase the number of points in the mesh
+    u, v = np.mgrid[0:2 * np.pi:100j, 0:np.pi:50j]
     x = np.sin(v) * np.cos(u)
     y = np.sin(v) * np.sin(u)
     z = np.cos(v)
@@ -355,6 +355,7 @@ def visualize_data_on_sphere_with_perturbation(mu_X, kappa, num_samples, angle, 
     plt.show()
 
 
+# parameters for the plot
 
 mu_X = np.array([-1, 1, 1])
 kappa = 15
